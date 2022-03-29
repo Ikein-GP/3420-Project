@@ -123,11 +123,12 @@ if (isset($_POST['submit']))
                         <span class="error <?=!isset($errors['password']) ? 'hidden' : "";?>">Please enter your current password to change your password</span>
                         <span class="error <?=!isset($errors['passwordIncorrect']) ? 'hidden' : "";?>">Your password was incorrect</span>
                     </div>
-                    <!-- Re-entering Password -->
+                    <!-- New Password Input -->
                     <div>
                         <label for="passwordNew">New Password</label>
                         <input type="password" name="passwordNew" id="passwordNew" placeholder="Enter new password here" value="<?=$passwordNew?>"/>
                     </div>
+                    <!-- Re-Enter New Password Input -->
                     <div>
                         <label for="passwordNewRe">Re-Enter New Password</label>
                         <input type="password" name="passwordNewRe" id="passwordNewRe" placeholder="Re-enter new password here" value="<?=$passwordNewRe?>"/>
