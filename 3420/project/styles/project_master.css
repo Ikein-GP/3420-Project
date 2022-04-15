@@ -1,4 +1,4 @@
- /* Reset Stylesheet */
+/* Reset Stylesheet */
 @import url("project_reset.css");
 
 /* Import Google Fonts */
@@ -6,10 +6,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 /* Variables */
-:root
-{
-  --light: #1BAFF3;
-  --dark: #0F234E;
+:root {
+    --light: #1BAFF3;
+    --dark: #0F234E;
 }
 
 /* MAIN STYLES */
@@ -45,26 +44,29 @@ h2 {
     margin-bottom: 0.5em;
     text-transform: uppercase;
     text-align: center;
-} 
+}
 
-h3{
+h3 {
     font-size: 1.75em;
     font-weight: bold;
     font-family: 'Nunito', sans-serif;
     margin-bottom: 0.5em;
 
 }
+
 p {
     line-height: 170%;
 }
 
-a, a:visited {
+a,
+a:visited {
     text-decoration: none;
     font-weight: bold;
     color: var(--dark);
 }
 
-a:hover, a:visited:hover {
+a:hover,
+a:visited:hover {
     color: var(--light);
 }
 
@@ -81,7 +83,8 @@ nav ul {
     font-weight: 600;
 }
 
-nav ul a, nav ul a:visited {
+nav ul a,
+nav ul a:visited {
     color: #fff;
     text-decoration: none;
     font-family: 'Nunito', sans-serif;
@@ -89,7 +92,8 @@ nav ul a, nav ul a:visited {
     padding: 1em;
 }
 
-nav ul a:hover, nav ul a:visited:hover {
+nav ul a:hover,
+nav ul a:visited:hover {
     background: var(--light);
     border-radius: 0.3em;
     text-shadow: 0px 0px 0px;
@@ -121,6 +125,7 @@ footer {
 .error {
     color: rgb(255, 0, 0);
 }
+
 /* END MAIN STYLES */
 
 /* FORMS */
@@ -153,7 +158,7 @@ form label {
 }
 
 input {
-    position:relative;
+    position: relative;
     border: none;
     border-bottom: 0.2em solid #ddd;
     background-color: whitesmoke;
@@ -190,15 +195,19 @@ section#viewlists section ul {
 section#viewlists section ul li {
     padding: 0.5em;
 }
+
 /* END VIEW ALL LISTS */
 
 
 /* PROJECT LOGIN */
 main#loginpage {
     background-color: #fff;
-    margin: 2em;  /* margin for spacing */
-    padding: 4em; /* padding for spacing*/
-    border-radius: 2em; /* rounded corners */
+    margin: 2em;
+    /* margin for spacing */
+    padding: 4em;
+    /* padding for spacing*/
+    border-radius: 2em;
+    /* rounded corners */
     text-align: center;
     max-width: 25em;
     display: flex;
@@ -242,12 +251,15 @@ main#loginpage h2 {
 }
 
 main#loginpage input {
-    position:relative;
-    color:#000000; /* Setting the font colour */
+    position: relative;
+    color: #000000;
+    /* Setting the font colour */
     border: none;
     border-bottom: 0.2em solid #ddd;
-    padding: 1.2em; /*padding for spacing*/
-    font-size: 600; /*Increasing the font size*/
+    padding: 1.2em;
+    /*padding for spacing*/
+    font-size: 600;
+    /*Increasing the font size*/
     font-weight: 500;
     background-color: whitesmoke;
     border-radius: 0.5em;
@@ -256,14 +268,48 @@ main#loginpage input {
 main#loginpage button {
     background-color: var(--light);
     background-image: linear-gradient(0deg, #134D80 0%, var(--dark) 100%);
-    color: white; /* Setting the font colour */
-    font-weight: bold; /*Making the font bolder*/
-    padding-left: 2em; /* padding for spacing*/
-    padding-right: 2em; /*padding for spacing*/
-    padding-top: 1em; /*padding for spacing*/
-    padding-bottom: 1em; /*padding for spacing*/
-    border-radius: 0.5em; /* rounded corners */
-    flex:1;
-    margin: 0.5em;  /* margin for spacing */
+    color: white;
+    /* Setting the font colour */
+    font-weight: bold;
+    /*Making the font bolder*/
+    padding-left: 2em;
+    /* padding for spacing*/
+    padding-right: 2em;
+    /*padding for spacing*/
+    padding-top: 1em;
+    /*padding for spacing*/
+    padding-bottom: 1em;
+    /*padding for spacing*/
+    border-radius: 0.5em;
+    /* rounded corners */
+    flex: 1;
+    margin: 0.5em;
+    /* margin for spacing */
 }
+
 /* END OF PROJECT LOGIN */
+
+/* Viewing Individual Lists */
+
+section#listItems table {
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section#listItems th,td {
+    padding: 1.25em;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
+section#listItems tr:nth-of-type(2n){
+    background-color: aliceblue;
+}
+
+section#listItems thead{
+    background-color: #0F234E;
+    color: white;
+}
