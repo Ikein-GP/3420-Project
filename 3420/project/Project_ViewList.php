@@ -55,9 +55,9 @@
                            <td><?=$row['description']?></td>
                            <td><a href="<?=$row['itemLink']?>">Item Link</a></td>
                            <td>
-                                <a href="Project_viewitem.php?itemID=<?=$row['itemID']?>" title="View List"><span class="fa-solid fa-eye" aria-hidden="true"></span> <span class="sr-only">Edit Item</span></a>
+                                <a href="Project_viewitem.php?itemID=<?=$row['itemID']?>" title="View Item"><span class="fa-solid fa-eye" aria-hidden="true"></span> <span class="sr-only">Edit Item</span></a>
                                 <a href="" title="View List"><span class="fa-solid fa-pen-to-square" aria-hidden="true"></span> <span class="sr-only">Edit Item</span></a>
-                                <a href="" title="View List"><span class="fa-solid fa-trash" aria-hidden="true"></span> <span class="sr-only">Delete Item</span></a>
+                                <a href="Project_deleteItem.php?itemID=<?=$row['itemID']?>" title="Delete Item"><span class="fa-solid fa-trash" aria-hidden="true"></span> <span class="sr-only">Delete Item</span></a>
                            </td>
                        </tr>
                     <?php $no++; endforeach ?>
