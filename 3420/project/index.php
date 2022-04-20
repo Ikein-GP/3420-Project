@@ -39,9 +39,9 @@
                 <ul>
                     <li><a href="" title="View List"><span class="fa-solid fa-list" aria-hidden="true"></span> <span class="sr-only">View List</span></a></li>
                     <li><a href="Project_additem.php?listID=<?php echo($row['listID']);?>" title="Add item to List"><span class="fa-solid fa-plus" aria-hidden="true"></span> <span class="sr-only">Add item to List</span></a></li>
-                    <li><a href="" title="Edit List"><span class="fa-solid fa-pen-to-square" aria-hidden="true"></span> <span class="sr-only">Edit List</span></a></li>
+                    <li><a href="Project_editWishlist.php?listID=<?php echo($row['listID']);?>" title="Edit List"><span class="fa-solid fa-pen-to-square" aria-hidden="true"></span> <span class="sr-only">Edit List</span></a></li>
                     <li><a href="" title="Disable List"><span class="fa-solid fa-ban" aria-hidden="true"></span> <span class="sr-only">Disable List</span></a></li>
-                    <li><a href="" title="Delete List"><span class="fa-solid fa-trash" aria-hidden="true"></span> <span class="sr-only">Delete List</span></a></li>
+                    <li><a href="Project_deleteList.php?listID=<?php echo($row['listID']);?>" title="Delete List"><span class="fa-solid fa-trash" aria-hidden="true"></span> <span class="sr-only">Delete List</span></a></li>
                 </ul>
                </section>
             <?php endforeach ?>
