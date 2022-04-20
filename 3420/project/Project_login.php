@@ -53,6 +53,7 @@ if (isset($_POST['submit']))
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Login&colon; Buck-et Registry &dash; Project COIS 3420H </title>
         <link rel="stylesheet" href="styles/project_master.css" />
+        <script defer src="scripts/login.js"></script>
     </head>
     <body>
        <?php include "includes/header.php";?>
@@ -72,7 +73,7 @@ if (isset($_POST['submit']))
                     <a href="Project_forgot_password.php">Forgot Password?</a>
                 </div>
                 <div>
-                    <span class="error <?=!isset($errors['login']) ? 'hidden' : "";?>">Your username or password was invalid</span>
+                    <span id="error" class="error <?=!isset($errors['login']) ? 'hidden' : "";?>">Your username or password was invalid</span>
                 </div>
                 <div>
                     <label for="remember">Remember me</label>

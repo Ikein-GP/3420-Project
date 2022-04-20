@@ -71,7 +71,7 @@ include 'includes/library.php';
                 </div>
                 <div>
                     <label for="expiry">Expiry Date:</label>
-                    <input type="text" id="expiry" name="expiry" required>
+                    <input type="date" id="expiry" name="expiry" required>
                     <span class="error <?=!isset($errors['expiry']) ? 'hidden' : "";?>">Please enter an expiry date</span>
                 </div>
                 <div>
