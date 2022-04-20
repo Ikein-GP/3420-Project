@@ -4,6 +4,13 @@ $user = $_POST['username'] ?? null;
 $password = $_POST['password'] ?? null;
 
 $errors = array();
+if(isset($_GET['logout']))
+{
+    session_start();
+    session_destroy();
+    header("Location:Project_login.php");
+    exit();
+}
 
 if (isset($_POST['submit'])) 
 {

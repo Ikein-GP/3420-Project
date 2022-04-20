@@ -1,6 +1,11 @@
 <?php 
 include 'includes/library.php';
 session_start(); //start the session
+if(!isset($_SESSION['user']))
+{
+    header("Location:Project_login.php");
+    exit();
+}
 $errors = array(); //declare empty array to add errors too
 
 //get name from post or set to NULL if doesn't exist

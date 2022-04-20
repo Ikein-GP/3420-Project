@@ -11,12 +11,19 @@
 
     //get listID from url paramters
     $listID = $_GET['listID'];
+    $ownerID = $_GET['ownerID'];
+
+    if($ownerID != $_SESSION['id'])
+    {
+        header("Location:index.php");
+        exit();
+    }
 
     $pdo = connectDB(); //connect to the database
     $wishlistItems = $pdo->prepare('SELECT * FROM wishlistitems WHERE wishListID = ?;'); //prepare the query to add the name and score to the database
     $wishlistItems->execute([$listID]); //execute the prepared query
 
-    $wishlist = $pdo->prepare('SELECT * FROM wishlisttable WHERE listID = ?;');
+    $wishlist = $pdo->prepare('SELECT * FROM wishlistTable WHERE listID = ?;');
     $wishlist->execute([$listID]);
 ?>
 
