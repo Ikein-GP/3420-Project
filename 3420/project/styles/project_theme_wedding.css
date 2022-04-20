@@ -1,0 +1,10 @@
+:root
+{
+  --light: #FFCDB6;
+  --dark: #FF7FA3;
+  --darkest: #EF77AB;
+}
+
+body {
+    background-image: linear-gradient(0deg, #FFFFB6 0%, var(--dark) 100%);
+}
