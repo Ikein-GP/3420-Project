@@ -10,8 +10,8 @@
     $errors = array();
 
     $pdo = connectDB(); //connect to the database
-    $printLists = $pdo->prepare('SELECT * FROM wishlistTable ORDER BY listID;'); //prepare the query to add the name and score to the database
-    $printLists->execute(); //execute the prepared query
+    $printLists = $pdo->prepare('SELECT * FROM wishlistTable WHERE owner = ? ORDER BY listID;'); //prepare the query to add the name and score to the database
+    $printLists->execute([$_SESSION['user']]); //execute the prepared query
 ?>
 
 <!DOCTYPE html>
