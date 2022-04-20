@@ -1,0 +1,12 @@
+:root
+{
+  --light: #CE3535;
+  --dark: #009B10;
+  --darkest: #004A10;
+}
+
+body {
+    background-color: var(--light);
+    background-image: linear-gradient(0deg, var(--darkest) 0%, var(--dark) 100%);
+    background-attachment: fixed;
+}
