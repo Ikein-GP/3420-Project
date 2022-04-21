@@ -47,6 +47,7 @@
         <title>All Lists&colon; Buck-et Registry &dash; Project COIS 3420H</title>
         <link rel="stylesheet" href="styles/project_master.css" />
         <script src="https://kit.fontawesome.com/2b1acf3db3.js" crossorigin="anonymous"></script>
+        <script defer src="scripts/viewItem.js"></script>
     </head>
     <body>
        <header>
@@ -74,7 +75,8 @@
                            <td><?=$row['description']?></td>
                            <td><a href="<?=$row['itemLink']?>">Item Link</a></td>
                            <td>
-                                <a href="Project_viewitem.php?itemID=<?=$row['itemID']?>" title="View Item"><span class="fa-solid fa-eye" aria-hidden="true"></span> <span class="sr-only">Edit Item</span></a>
+                                <input class="hidden" value="<?=$row['itemID']?>" id="item">
+                                <a href="Project_viewitem.php?itemID=<?=$row['itemID']?>" id="view" title="View Item"><span class="fa-solid fa-eye" aria-hidden="true" id="Project_viewitem.php?itemID=<?=$row['itemID']?>"></span> <span class="sr-only">Edit Item</span></a>
                                 <a href="Project_editItem.php?itemID=<?=$row['itemID']?>" title="View List"><span class="fa-solid fa-pen-to-square" aria-hidden="true"></span> <span class="sr-only">Edit Item</span></a>
                                 <a href="Project_deleteItem.php?itemID=<?=$row['itemID']?>" title="Delete Item"><span class="fa-solid fa-trash" aria-hidden="true"></span> <span class="sr-only">Delete Item</span></a>
                            </td>
