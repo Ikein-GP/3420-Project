@@ -36,14 +36,19 @@
                 <h3><?php echo($row['title']); ?></h3>
                 <p><?php echo($row['description']);?></p>
                 <p><span class="date">Created date: <?php echo($row['createDate']); ?></span> &middot; <span class="expiry">Expiry date: <?php echo($row['expiryDate']); ?></span></p>
-                <ul>
-                    <li><a href="Project_ViewList.php?listID=<?php echo($row['listID']);?>" title="View List"><span class="fa-solid fa-list" aria-hidden="true"></span> <span class="sr-only">View List</span></a></li>
-                    <li><a href="Project_additem.php?listID=<?php echo($row['listID']);?>" title="Add item to List"><span class="fa-solid fa-plus" aria-hidden="true"></span> <span class="sr-only">Add item to List</span></a></li>
-                    <li><a href="Project_editWishlist.php?listID=<?php echo($row['listID']);?>" title="Edit List"><span class="fa-solid fa-pen-to-square" aria-hidden="true"></span> <span class="sr-only">Edit List</span></a></li>
-                    <li><a href="" title="Disable List"><span class="fa-solid fa-ban" aria-hidden="true"></span> <span class="sr-only">Disable List</span></a></li>
-                    <li><a href="Project_deleteList.php?listID=<?php echo($row['listID']);?>" title="Delete List"><span class="fa-solid fa-trash" aria-hidden="true"></span> <span class="sr-only">Delete List</span></a></li>
-                </ul>
-               </section>
+                <div>
+                    <ul>
+                        <li><a href="Project_ViewList.php?listID=<?php echo($row['listID']);?>" title="View List"><span class="fa-solid fa-list" aria-hidden="true"></span> <span class="sr-only">View List</span></a></li>
+                        <li><a href="Project_additem.php?listID=<?php echo($row['listID']);?>" title="Add item to List"><span class="fa-solid fa-plus" aria-hidden="true"></span> <span class="sr-only">Add item to List</span></a></li>
+                        <li><a href="Project_editWishlist.php?listID=<?php echo($row['listID']);?>" title="Edit List"><span class="fa-solid fa-pen-to-square" aria-hidden="true"></span> <span class="sr-only">Edit List</span></a></li>
+                        <li><a href="Project_deleteList.php?listID=<?php echo($row['listID']);?>" title="Delete List"><span class="fa-solid fa-trash" aria-hidden="true"></span> <span class="sr-only">Delete List</span></a></li>
+                    </ul>
+                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                        <button type="submit" name="disable"><span class="fa-solid fa-ban" aria-hidden="true"></span> <span class="sr-only">Disable List</span></button>
+                    </form>
+                    <a href="Project_disableItem.php?" title="Disable List"></a>
+                </div>
+                </section>
             <?php endforeach ?>
            </section>
        </main>
