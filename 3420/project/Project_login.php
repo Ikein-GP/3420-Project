@@ -1,6 +1,13 @@
 <?php  
 
-$user = $_POST['username'] ?? null;
+if (isset($_COOKIE['username']) && $_COOKIE['username'] != "") //if the cookie is set and actually contains something
+{
+    $user = $_COOKIE['username']; //set the user value to the value of the cookie
+}
+else
+{
+    $user = $_POST['username'] ?? null; //otherwise set the user value to whatever was submitted or null
+}
 $password = $_POST['password'] ?? null;
 
 $errors = array();
@@ -14,7 +21,14 @@ if(isset($_GET['logout']))
 
 if (isset($_POST['submit'])) 
 {
-
+    if (isset($_POST['remember'])) //if remember me was selected on login
+    {
+        setcookie("username", $user, time() + (86400*30), "/"); //save username in a cookie for 30 days
+    }
+    else //if remember me was not selected on login
+    {
+        setcookie("username", "", time() - 3600, "/"); //delete the username cookie
+    }
     include 'includes/library.php';
     $pdo = connectDB(); //connect to database
         
@@ -34,7 +48,7 @@ if (isset($_POST['submit']))
             session_start(); //start the session
             $_SESSION['user'] = $row['username']; //load session credentials
             $_SESSION['id'] = $row['userId'];
-            header("Location: index.php"); //redirect to the homepage
+            header("Location: index.php?remember=$remember"); //redirect to the homepage
             exit();
         }
         else

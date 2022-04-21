@@ -6,6 +6,17 @@
         header("Location:Project_login.php");
         exit();
     }
+    $pdo = connectDB();
+    if(isset($_POST['delete'])){
+        $deleteQuery = $pdo->prepare('DELETE FROM wishlistitems WHERE itemID = ?');
+        $deleteQuery->execute([$_POST['delete']]);
+        header("Location: Project_itemDeleted.php");
+        exit();
+    }
+    else if(isset($_POST['cancel'])){
+        header("Location: index.php");
+        exit();
+    }
 
     //if itemID has not been passed to url paramters, die
     if(!isset($_GET['itemID']) && !(isset($_POST['delete']) || isset($_POST['cancel']))){
@@ -15,7 +26,6 @@
     //get itemID from url paramters
     $itemID = $_GET['itemID'];
 
-    $pdo = connectDB();
     $listItem=$pdo->prepare('SELECT * FROM wishlistitems WHERE itemID = ?');
     $listItem->execute([$itemID]);
 
@@ -29,20 +39,6 @@
     $title = $itemInfo['title'];
     $descrip = $itemInfo['description'];
     $link = $itemInfo['itemLink'];
-
-    //if delete selected.
-    if(isset($_POST['delete'])){
-        $deleteQuery = $pdo->prepare('DELETE FROM wishlistitems WHERE itemID = ?');
-        $deleteQuery->execute([$_POST['delete']]);
-        header("Location:Project_itemDeleted.php");
-        exit();
-    }
-    else if(isset($_POST['cancel'])){
-        header("Location:index.php");
-        exit();
-    }
-    
-
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +49,7 @@
       <title>Final Project - Item View</title>
       <!-- link rel to any css sheets used -->
       <link rel = "stylesheet" href = "styles/project_master.css" />
+      <script defer src="scripts/deleteItem.js"></script>
 </head>
 <body>
     <?php include "includes/header.php";?>
@@ -81,7 +78,7 @@
                </table>
                <div>
                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                        <button type="submit" name="delete" value=<?=$itemID?>>Delete</button>
+                        <button type="submit" name="delete" id="delete" value=<?=$itemID?>>Delete</button>
                         <button type="submit" name="cancel">Cancel</button>
                     </form>
                </div>
