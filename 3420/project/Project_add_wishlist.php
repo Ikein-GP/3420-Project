@@ -35,7 +35,7 @@ include 'includes/library.php';
         {
             $pdo = connectDB(); //connect to database
             $createListEntry = $pdo->prepare('INSERT INTO wishlistTable VALUES (NULL, ?, ?, ?, ?, NOW(), ?);'); //prepare the query to add the wishlist to the table of all wishlists
-            $createListEntry->execute([$title, $description, $_SESSION['user'], password_hash($password, PASSWORD_BCRYPT), $expiry]); //add the table
+            $createListEntry->execute([$title, $description, $_SESSION['id'], password_hash($password, PASSWORD_BCRYPT), $expiry]); //add the table
             $listId = $pdo->lastInsertId(); //keep track of the id number for the fresh wishlist
         }
     }

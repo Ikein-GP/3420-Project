@@ -25,6 +25,7 @@
     $title = $itemInfo['title'];
     $descrip = $itemInfo['description'];
     $link = $itemInfo['itemLink'];
+
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +41,7 @@
     <?php include "includes/header.php";?>
     <?php include "includes/nav.php";?>
     <main>
-        <h2>Item View</h2>
+        <h2>Item View : <?=$title?> </h2>
         <h3>Item Description:</h3> <p><?=$descrip?></p>
         <h3>Item Link: </h3> </h3> <p><?=$link?></p>
         <h3>Image of Item (Placeholder):</h3> <!-- img not ready yet -->

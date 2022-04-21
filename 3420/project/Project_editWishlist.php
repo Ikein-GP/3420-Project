@@ -32,10 +32,6 @@ include 'includes/library.php';
         {
             $errors['description'] = true;
         }
-        if(!isset($password) || strlen($password) === 0)
-        {
-            $errors['password'] = true;
-        }
         if(!isset($expiry) || strlen($expiry) === 0)
         {
             $errors['expiry'] = true;
@@ -43,11 +39,22 @@ include 'includes/library.php';
 
         if(count($errors)===0)
         {
-            $pdo = connectDB(); //connect to database
-            $updateListQuery = $pdo->prepare('UPDATE wishlistTable SET title = ?, description = ?, publicPass = ?, expiryDate = ? WHERE listID = ?;'); //prepare the query to add the wishlist to the table of all wishlists
-            $updateListQuery->execute([$title, $description,password_hash($password, PASSWORD_BCRYPT), $expiry, $listID]); //add the table
-            $listId = $pdo->lastInsertId(); //keep track of the id number for the fresh wishlist
-            header("Location:index.php");
+            if(!isset($password) || strlen($password) === 0)
+            {
+                $pdo = connectDB(); //connect to database
+                $updateListQuery = $pdo->prepare('UPDATE wishlistTable SET title = ?, description = ?, expiryDate = ? WHERE listID = ?;'); //prepare the query to add the wishlist to the table of all wishlists
+                $updateListQuery->execute([$title, $description, $expiry, $listID]); //add the table
+                $listId = $pdo->lastInsertId(); //keep track of the id number for the fresh wishlist
+                header("Location:index.php");
+            }
+            else{
+                $pdo = connectDB(); //connect to database
+                $updateListQuery = $pdo->prepare('UPDATE wishlistTable SET title = ?, description = ?, publicPass = ?, expiryDate = ? WHERE listID = ?;'); //prepare the query to add the wishlist to the table of all wishlists
+                $updateListQuery->execute([$title, $description,password_hash($password, PASSWORD_BCRYPT), $expiry, $listID]); //add the table
+                $listId = $pdo->lastInsertId(); //keep track of the id number for the fresh wishlist
+                header("Location:index.php");
+            }
+            
         }
     }
 ?>
@@ -57,7 +64,7 @@ include 'includes/library.php';
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles/project_master.css">
-        <title>Add Wishlist&colon; Buck-et Registry &dash; Project COIS 3420H</title>
+        <title>Edit Wishlist&colon; Buck-et Registry &dash; Project COIS 3420H</title>
     </head>
     <body>
     <?php include "includes/header.php";?>
@@ -77,8 +84,7 @@ include 'includes/library.php';
                 </div>
                 <div>
                     <label for="password">Public View Password:</label>
-                    <input type="password" id="password" name="password" required>
-                    <span class="error <?=!isset($errors['password']) ? 'hidden' : "";?>">Please enter a public view password</span>
+                    <input type="password" id="password" name="password">
                 </div>
                 <div>
                     <label for="expiry">Expiry Date:</label>
