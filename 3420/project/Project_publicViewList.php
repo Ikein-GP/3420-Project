@@ -31,7 +31,7 @@
 
     $pdo = connectDB(); //connect to the database
 
-    $wishlist = $pdo->prepare('SELECT * FROM wishlistTable WHERE listID = ?;');
+    $wishlist = $pdo->prepare('SELECT * FROM wishlisttable WHERE listID = ?;');
     $wishlist->execute([$listID]);
     
     $wishlistInfo = $wishlist->fetch();
@@ -77,6 +77,7 @@
                             <th>Title</th>
                             <th>Description</th>
                             <th>Link</th>
+                            <th>Status</th>
                             <th>Action</th>     
                         </tr>
                    </thead>
@@ -87,6 +88,7 @@
                            <td><?=$row['title']?></td>
                            <td><?=$row['description']?></td>
                            <td><a href="<?=$row['itemLink']?>">Item Link</a></td>
+                           <td><?=$row['status']?></td>
                            <td>
                                 <a href="Project_publicViewitem.php?itemID=<?=$row['itemID']?>" title="View Item"><span class="fa-solid fa-eye" aria-hidden="true"></span> <span class="sr-only">View Item</span></a>
                            </td>

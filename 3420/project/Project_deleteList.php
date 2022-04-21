@@ -47,6 +47,7 @@
       <title>Final Project - Item View</title>
       <!-- link rel to any css sheets used -->
       <link rel = "stylesheet" href = "styles/project_master.css" />
+      <script defer src="scripts/deleteList.js"></script>
 </head>
 <body>
     <?php include "includes/header.php";?>
@@ -55,7 +56,7 @@
     <h2>Are you sure you want to delete the list: <?=$wishlist->fetch()['title']?>?</h2>
         <div>
             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <button type="submit" name="delete" value=<?=$listID?>>Delete</button>
+                <button type="submit" name="delete" id="delete" value=<?=$listID?>>Delete</button>
                 <button type="submit" name="cancel">Cancel</button>
             </form>
         </div>

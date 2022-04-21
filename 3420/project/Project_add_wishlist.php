@@ -46,7 +46,9 @@ include 'includes/library.php';
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles/project_master.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <script defer src="scripts/addWishlist.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <title>Add Wishlist&colon; Buck-et Registry &dash; Project COIS 3420H</title>
     </head>
     <body>
@@ -72,7 +74,7 @@ include 'includes/library.php';
                 </div>
                 <div>
                     <label for="expiry">Expiry Date:</label>
-                    <input type="date" id="expiry" name="expiry" required>
+                    <input type="text" id="expiry" name="expiry" required>
                     <span class="error <?=!isset($errors['expiry']) ? 'hidden' : "";?>">Please enter an expiry date</span>
                 </div>
                 <div>
@@ -81,5 +83,8 @@ include 'includes/library.php';
             </form>
         </main>
     <?php include "includes/footer.php";?>
+        <script>
+            flatpickr("#expiry", {});
+        </script>
     </body>
 </html>

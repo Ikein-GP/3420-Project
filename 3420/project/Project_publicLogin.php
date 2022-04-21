@@ -15,7 +15,7 @@ $pdo = connectDB(); //connect to the database
 if (isset($_POST['submit'])) 
 {
     //get the wishlist details
-    $wishlist = $pdo->prepare('SELECT * FROM wishlistTable WHERE listID = ?;');
+    $wishlist = $pdo->prepare('SELECT * FROM wishlisttable WHERE listID = ?;');
     $wishlist->execute([$_POST['submit']]);
 
     $wishlistInfo = $wishlist->fetch();
@@ -41,7 +41,7 @@ else{
 
 
     //get the wishlist details
-    $wishlist = $pdo->prepare('SELECT * FROM wishlistTable WHERE listID = ?;');
+    $wishlist = $pdo->prepare('SELECT * FROM wishlisttable WHERE listID = ?;');
     $wishlist->execute([$listID]);
 
     $wishlistInfo = $wishlist->fetch();

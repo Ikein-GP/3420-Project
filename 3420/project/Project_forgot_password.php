@@ -1,4 +1,12 @@
 <?php
+include 'includes/library.php';
+
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 $errors = array(); //declare empty array to add errors too
 $email = $_POST['email'] ?? null;
 
@@ -10,7 +18,60 @@ if (isset($_POST['submit']))
     }
     if(count($errors)===0)
     {
+        $pdo = connectDB(); //connect to the database
+        $result = $pdo->prepare('SELECT * FROM projectlogin WHERE email=?');
+        $result->execute([$email]); //execute the prepared query
+        $row = $result->fetch(); //fetch the next row,
 
+        if($row)
+        {
+
+            $code = uniqid(true);
+
+            $Insertcode = $pdo->prepare('INSERT INTO resetPassword values (NULL, ?, ?);'); //prepare to create the account
+            $Insertcode->execute([$code, $email]); //execute the account creation query
+
+            require 'vendor/phpmailer/phpmailer/src/Exception.php';
+            require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+            require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+
+            //Create an instance; passing `true` enables exceptions
+            $mail = new PHPMailer();
+
+            try {
+                //Server settings
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'project3420h@gmail.com';                     //SMTP username
+                $mail->Password   = 'winter2022';                               //SMTP password
+                $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+                $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                //Recipients
+                $mail->setFrom('project3420h@gmail.com', 'Bucket-et Registry');
+                $mail->addAddress($email);     //Add a recipient
+                $mail->addReplyTo('no-reply@gmail.com', 'No reply');
+
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = 'Password Reset Link - Buck-et Registry';
+                $mail->Body    = "Click <a href='https://loki.trentu.ca/~gregoryprouty/3420/project/Project_forgotpassword_reset.php?code=$code'>here</a> to reset your password";
+                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                $mail->send();
+
+
+                header("Location: Project_forgot_redirect"); //redirect to the homepage
+                } 
+                catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                die();
+                }
+        }
+        else{
+             $errors['email'] = true;
+        }
     }
 }
 ?>

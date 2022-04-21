@@ -22,6 +22,7 @@
         <title>All Lists&colon; Buck-et Registry &dash; Project COIS 3420H</title>
         <link rel="stylesheet" href="styles/project_master.css" />
         <script src="https://kit.fontawesome.com/2b1acf3db3.js" crossorigin="anonymous"></script>
+        <script defer src="scripts/index.js"></script>
     </head>
     <body>
        <header>
@@ -41,7 +42,8 @@
                     <li><a href="Project_additem.php?listID=<?php echo($row['listID']);?>" title="Add item to List"><span class="fa-solid fa-plus" aria-hidden="true"></span> <span class="sr-only">Add item to List</span></a></li>
                     <li><a href="Project_editWishlist.php?listID=<?php echo($row['listID']);?>" title="Edit List"><span class="fa-solid fa-pen-to-square" aria-hidden="true"></span> <span class="sr-only">Edit List</span></a></li>
                     <li><a href="" title="Disable List"><span class="fa-solid fa-ban" aria-hidden="true"></span> <span class="sr-only">Disable List</span></a></li>
-                    <li><a href="Project_deleteList.php?listID=<?php echo($row['listID']);?>" title="Delete List"><span class="fa-solid fa-trash" aria-hidden="true"></span> <span class="sr-only">Delete List</span></a></li>
+                    <li><a href="Project_deleteList.php?listID=<?php echo($row['listID']);?>" id="delete" title="Delete List"><span class="fa-solid fa-trash" aria-hidden="true"></span> <span class="sr-only">Delete List</span></a></li>
+                    <li><button id="public-view" type="button" title="Copy Public View Link to Clipboard" value="https://loki.trentu.ca/~gregoryprouty/3420/project/Project_publicViewList?listID=<?php echo($row['listID']);?>"><span class="fa-solid fa-eye" aria-hidden="true"></span> <span class="sr-only">Copy Public View Link to Clipboard</span></button></li>
                 </ul>
                </section>
             <?php endforeach ?>
