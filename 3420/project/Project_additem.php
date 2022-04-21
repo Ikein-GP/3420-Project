@@ -51,6 +51,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Final Project - Add Item</title>
       <link rel="stylesheet" href="styles/project_master.css" />
+      <script defer src="scripts/addItem.js"></script>
       <!-- link rel to any css sheets used -->
 </head>
 <body>

@@ -88,6 +88,7 @@ if (isset($_POST['submit']))
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Create Account</title>
         <link rel="stylesheet" href="styles/project_master.css" />
+        <script defer src="scripts/createAccount.js"></script>
     </head>
     <body>
        <?php include "includes/header.php";?>

@@ -21,7 +21,7 @@
 
     $pdo = connectDB(); //connect to the database
 
-    $wishlistStub = $pdo->prepare('SELECT ownerID FROM wishlistTable WHERE listID = ?;');
+    $wishlistStub = $pdo->prepare('SELECT ownerID FROM wishlisttable WHERE listID = ?;');
     $wishlistStub->execute([$listID]);
     
     $ownerID = $wishlistStub->fetch()['ownerID'];
@@ -35,7 +35,7 @@
     $wishlistItems = $pdo->prepare('SELECT * FROM wishlistitems WHERE wishListID = ?;'); //prepare the query to add the name and score to the database
     $wishlistItems->execute([$listID]); //execute the prepared query
 
-    $wishlist = $pdo->prepare('SELECT * FROM wishlistTable WHERE listID = ?;');
+    $wishlist = $pdo->prepare('SELECT * FROM wishlisttable WHERE listID = ?;');
     $wishlist->execute([$listID]);
 ?>
 

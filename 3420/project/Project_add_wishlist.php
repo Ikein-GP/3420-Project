@@ -34,7 +34,7 @@ include 'includes/library.php';
         if(count($errors)===0)
         {
             $pdo = connectDB(); //connect to database
-            $createListEntry = $pdo->prepare('INSERT INTO wishlistTable VALUES (NULL, ?, ?, ?, ?, NOW(), ?);'); //prepare the query to add the wishlist to the table of all wishlists
+            $createListEntry = $pdo->prepare('INSERT INTO wishlisttable VALUES (NULL, ?, ?, ?, ?, NOW(), ?);'); //prepare the query to add the wishlist to the table of all wishlists
             $createListEntry->execute([$title, $description, $_SESSION['id'], password_hash($password, PASSWORD_BCRYPT), $expiry]); //add the table
             $listId = $pdo->lastInsertId(); //keep track of the id number for the fresh wishlist
         }
@@ -46,13 +46,14 @@ include 'includes/library.php';
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles/project_master.css">
+        <script defer src="scripts/addWishlist.js"></script>
         <title>Add Wishlist&colon; Buck-et Registry &dash; Project COIS 3420H</title>
     </head>
     <body>
     <?php include "includes/header.php";?>
     <?php include "includes/nav.php";?>
         <main>
-            <h2>Add to Wishlist</h2>
+            <h2>Create Wishlist</h2>
             <form id="addwishlist" name="addwishlist" method="post" enctype="multipart/form-data">
                 <div>
                     <label for="title">List Title:</label>
