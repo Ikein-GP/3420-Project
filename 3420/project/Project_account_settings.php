@@ -96,8 +96,9 @@ if (isset($_POST['submit']))
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Create Account</title>
+        <title>Account Settings</title>
         <link rel="stylesheet" href="styles/project_master.css" />
+        <script defer src="scripts/accountSettings.js"></script>
     </head>
     <body>
        <?php include "includes/header.php";?>
@@ -109,16 +110,19 @@ if (isset($_POST['submit']))
                     <div>
                         <label for="fname">New First Name</label>
                         <input type="text" name="fname" id="fname" placeholder="Enter your first name here" value="<?=$fname?>"/>
+                        <span class="error <?=!isset($errors['firstName']) ? 'hidden' : "";?>">Can't have a blank name!</span>
                     </div>
                     <!-- Last Name Input -->
                     <div>
                         <label for="lname">New Last Name</label>
                         <input type="text" name="lname" id="lname" placeholder="Enter your last name here" value="<?=$lname?>"/>
+                        <span class="error <?=!isset($errors['lastName']) ? 'hidden' : "";?>">Can't have a blank name!</span>
                     </div>
                     <!-- Username Input -->
                     <div>
                         <label for="username">New Username</label>
                         <input type="text" name="username" id="username" placeholder="Enter your username here" value="<?=$username?>"/>
+                        <span class="error <?=!isset($errors['blankUser']) ? 'hidden' : "";?>">Can't have a blank username!</span>
                         <span class="error <?=!isset($errors['uniqueUser']) ? 'hidden' : "";?>">Username already taken</span>
                     </div>
                     <!-- Password Input For Changing Password -->

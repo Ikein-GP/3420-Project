@@ -10,7 +10,7 @@
     $errors = array();
 
     $pdo = connectDB(); //connect to the database
-    $printLists = $pdo->prepare('SELECT * FROM wishlistTable WHERE ownerID = ? ORDER BY listID;'); //prepare the query to add the name and score to the database
+    $printLists = $pdo->prepare('SELECT * FROM wishlisttable WHERE ownerID = ? ORDER BY listID;'); //prepare the query to add the name and score to the database
     $printLists->execute([$_SESSION['id']]); //execute the prepared query
 ?>
 
@@ -37,7 +37,7 @@
                 <p><?php echo($row['description']);?></p>
                 <p><span class="date">Created date: <?php echo($row['createDate']); ?></span> &middot; <span class="expiry">Expiry date: <?php echo($row['expiryDate']); ?></span></p>
                 <ul>
-                    <li><a href="Project_viewList.php?listID=<?php echo($row['listID']);?>" title="View List"><span class="fa-solid fa-list" aria-hidden="true"></span> <span class="sr-only">View List</span></a></li>
+                    <li><a href="Project_ViewList.php?listID=<?php echo($row['listID']);?>" title="View List"><span class="fa-solid fa-list" aria-hidden="true"></span> <span class="sr-only">View List</span></a></li>
                     <li><a href="Project_additem.php?listID=<?php echo($row['listID']);?>" title="Add item to List"><span class="fa-solid fa-plus" aria-hidden="true"></span> <span class="sr-only">Add item to List</span></a></li>
                     <li><a href="Project_editWishlist.php?listID=<?php echo($row['listID']);?>" title="Edit List"><span class="fa-solid fa-pen-to-square" aria-hidden="true"></span> <span class="sr-only">Edit List</span></a></li>
                     <li><a href="" title="Disable List"><span class="fa-solid fa-ban" aria-hidden="true"></span> <span class="sr-only">Disable List</span></a></li>
