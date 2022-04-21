@@ -2,6 +2,9 @@
     include 'includes/library.php';
     session_start();
 
+    //get listID from url paramters
+    $listID = $_GET['listID'];
+
     if(!isset($_SESSION['user']))
     {
         header("Location:Project_login.php");
@@ -15,28 +18,39 @@
         exit();
     }
 
+    if(!isset($_SESSION['publicListID'])){
+        header("Location: Project_publicLogin.php?listID=".strval($listID)); //redirect to the login
+        exit();
+    }
+    else if($_SESSION['publicListID']!=$_GET['listID']){
+        header("Location: Project_publicLogin.php?listID=".strval($listID)); //redirect to the login
+        exit();
+    }
 
-    //get listID from url paramters
-    $listID = $_GET['listID'];
+    
 
     $pdo = connectDB(); //connect to the database
 
-    $wishlistStub = $pdo->prepare('SELECT ownerID FROM wishlistTable WHERE listID = ?;');
-    $wishlistStub->execute([$listID]);
+    $wishlist = $pdo->prepare('SELECT * FROM wishlistTable WHERE listID = ?;');
+    $wishlist->execute([$listID]);
     
-    $ownerID = $wishlistStub->fetch()['ownerID'];
+    $wishlistInfo = $wishlist->fetch();
 
-    if($ownerID != $_SESSION['id'])
-    {
-        header("Location:index.php");
-        exit();
+    //get creation and expiry dates, replace the / with a - 
+    $createDate = date_create(str_replace("/","-",$wishlistInfo['createDate']));
+    $expiryDate = date_create(str_replace("/","-",$wishlistInfo['expiryDate']));
+
+
+    if($expiryDate<=$createDate){
+        die("Error: This wishlist has expired.");
     }
+    //date_format($expiryDate,'d/m/Y');
+
 
     $wishlistItems = $pdo->prepare('SELECT * FROM wishlistitems WHERE wishListID = ?;'); //prepare the query to add the name and score to the database
     $wishlistItems->execute([$listID]); //execute the prepared query
 
-    $wishlist = $pdo->prepare('SELECT * FROM wishlistTable WHERE listID = ?;');
-    $wishlist->execute([$listID]);
+    
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +68,7 @@
             <?php include "includes/nav.php";?>
        </header> 
        <main>
-           <h2>Viewing list : <?=$wishlist->fetch()['title']?></h2>
+           <h2>Viewing list : <?=$wishlistInfo['title']?></h2>
            <section id="listItems">
                <table>
                    <thead>
@@ -74,9 +88,7 @@
                            <td><?=$row['description']?></td>
                            <td><a href="<?=$row['itemLink']?>">Item Link</a></td>
                            <td>
-                                <a href="Project_viewitem.php?itemID=<?=$row['itemID']?>" title="View Item"><span class="fa-solid fa-eye" aria-hidden="true"></span> <span class="sr-only">Edit Item</span></a>
-                                <a href="Project_editItem.php?itemID=<?=$row['itemID']?>" title="View List"><span class="fa-solid fa-pen-to-square" aria-hidden="true"></span> <span class="sr-only">Edit Item</span></a>
-                                <a href="Project_deleteItem.php?itemID=<?=$row['itemID']?>" title="Delete Item"><span class="fa-solid fa-trash" aria-hidden="true"></span> <span class="sr-only">Delete Item</span></a>
+                                <a href="Project_publicViewitem.php?itemID=<?=$row['itemID']?>" title="View Item"><span class="fa-solid fa-eye" aria-hidden="true"></span> <span class="sr-only">View Item</span></a>
                            </td>
                        </tr>
                     <?php $no++; endforeach ?>
