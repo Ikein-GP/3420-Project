@@ -145,7 +145,8 @@ if (isset($_POST['submit']))
                     </div>
 
                     <div id="buttons">    
-                    <button type="submit" name="submit">Save Settings</button>
+                        <button type="submit" name="submit">Save Settings</button>
+                        <a href="Project_deleteAccount.php">Delete Account</a>
                     </div>
                 </form>
         </main>

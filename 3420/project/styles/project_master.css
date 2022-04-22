@@ -382,3 +382,15 @@ thead{
     color: white;
 }
 
+/* Delete Account */
+
+form div#buttons a{
+    margin-top: 1.5em;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    width: fit-content;
+    font-size: 0.75em;
+    background-color: #dc3545;
+    color: white;
+}
+
