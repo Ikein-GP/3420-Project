@@ -83,7 +83,7 @@ if (isset($_POST['submit']))
                     <span id="error" class="error <?=!isset($errors['login']) ? 'hidden' : "";?>">Your password was invalid.</span>
                 </div>
                 <div id="buttons">    
-                    <button type="submit" name="submit" >Confirm</button>
+                    <button type="submit" name="submit">Confirm</button>
                 </div>
              </form>
         </main>

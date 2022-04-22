@@ -64,6 +64,7 @@
                             <th>Title</th>
                             <th>Description</th>
                             <th>Link</th>
+                            <th>Status</th>
                             <th>Action</th>     
                         </tr>
                    </thead>
@@ -74,6 +75,16 @@
                            <td><?=$row['title']?></td>
                            <td><?=$row['description']?></td>
                            <td><a href="<?=$row['itemLink']?>">Item Link</a></td>
+                           <td>
+                                <?php
+                                    if($row['status']==0){
+                                        echo "Not Purchased";
+                                    }
+                                    else{
+                                        echo "Purchased";
+                                    }
+                                ?>
+                            </td>
                            <td>
                                 <input class="hidden" value="<?=$row['itemID']?>" id="item">
                                 <a href="Project_viewitem.php?itemID=<?=$row['itemID']?>" id="view" title="View Item"><span class="fa-solid fa-eye" aria-hidden="true" id="Project_viewitem.php?itemID=<?=$row['itemID']?>"></span> <span class="sr-only">Edit Item</span></a>
