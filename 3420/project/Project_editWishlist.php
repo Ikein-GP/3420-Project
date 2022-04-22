@@ -20,7 +20,8 @@ include 'includes/library.php';
     $title = $_POST['title'] ?? null;
     $description = $_POST['description'] ?? null;
     $password = $_POST['password'] ?? null;
-    $expiry = $_POST['expiry'] ?? null; //add a widget for this later
+    $expiry = $_POST['expiry'] ?? null;
+    $theme = $_POST['theme'] ?? null;
 
     if (isset($_POST['submit']))
     {   
@@ -42,15 +43,15 @@ include 'includes/library.php';
             if(!isset($password) || strlen($password) === 0)
             {
                 $pdo = connectDB(); //connect to database
-                $updateListQuery = $pdo->prepare('UPDATE wishlisttable SET title = ?, description = ?, expiryDate = ? WHERE listID = ?;'); //prepare the query to add the wishlist to the table of all wishlists
-                $updateListQuery->execute([$title, $description, $expiry, $listID]); //add the table
+                $updateListQuery = $pdo->prepare('UPDATE wishlisttable SET title = ?, description = ?, expiryDate = ?, theme = ? WHERE listID = ?;'); //prepare the query to add the wishlist to the table of all wishlists
+                $updateListQuery->execute([$title, $description, $expiry, $theme, $listID]); //add the table
                 $listId = $pdo->lastInsertId(); //keep track of the id number for the fresh wishlist
                 header("Location:index.php");
             }
             else{
                 $pdo = connectDB(); //connect to database
-                $updateListQuery = $pdo->prepare('UPDATE wishlisttable SET title = ?, description = ?, publicPass = ?, expiryDate = ? WHERE listID = ?;'); //prepare the query to add the wishlist to the table of all wishlists
-                $updateListQuery->execute([$title, $description,password_hash($password, PASSWORD_BCRYPT), $expiry, $listID]); //add the table
+                $updateListQuery = $pdo->prepare('UPDATE wishlisttable SET title = ?, description = ?, publicPass = ?, expiryDate = ?, theme = ? WHERE listID = ?;'); //prepare the query to add the wishlist to the table of all wishlists
+                $updateListQuery->execute([$title, $description,password_hash($password, PASSWORD_BCRYPT), $expiry, $theme, $listID]); //add the table
                 $listId = $pdo->lastInsertId(); //keep track of the id number for the fresh wishlist
                 header("Location:index.php");
             }
@@ -91,6 +92,15 @@ include 'includes/library.php';
                     <label for="expiry">Expiry Date:</label>
                     <input type="date" id="expiry" name="expiry" value = "<?=$wishlistData['expiryDate']?>" required>
                     <span class="error <?=!isset($errors['expiry']) ? 'hidden' : "";?>">Please enter an expiry date</span>
+                </div>
+                <div>
+                    <select name="theme" id="theme">
+                        <option value="1">Default</option>
+                        <option value="2">Christmas</option>
+                        <option value="3">Halloween</option>
+                        <option value="4">Valentines</option>
+                        <option value="5">Wedding</option>
+                    </select>
                 </div>
                 <div>
                     <button type="submit" name="submit">Create</button>

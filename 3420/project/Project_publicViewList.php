@@ -140,7 +140,7 @@
                                 </td>
                                 <td>
                                     <input type="text" name = "listID" value = "<?=$listID?>"hidden></input>
-                                    <a href="Project_publicViewitem.php?itemID=<?=$row['itemID']?>" title="View Item"><span class="fa-solid fa-eye" aria-hidden="true"></span> <span class="sr-only">View Item</span></a>
+                                    <a href="Project_publicViewItem.php?itemID=<?=$row['itemID']?>" title="View Item"><span class="fa-solid fa-eye" aria-hidden="true"></span> <span class="sr-only">View Item</span></a>
                                     <?php if($row['status']==0):?>
                                     <button title="Mark as bought" type="submit" name="markAsBought" value="<?=$row['itemID']?>"><span class="fa-solid fa-check" aria-hidden="true"></span> <span class="sr-only">Mark as bought</span></button>
                                     <?php else:?>

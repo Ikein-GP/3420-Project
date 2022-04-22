@@ -88,6 +88,7 @@ include 'includes/library.php';
                         <option value="4">Valentines</option>
                         <option value="5">Wedding</option>
                     </select>
+                </div>
                 <div>
                     <button type="submit" name="submit">Create</button>
                 </div>
