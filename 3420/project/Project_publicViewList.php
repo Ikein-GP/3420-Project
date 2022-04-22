@@ -99,6 +99,7 @@
         <title>Viewing list : <?=$wishlistInfo['title']?> Project COIS 3420H</title>
         <link rel="stylesheet" href="styles/project_master.css" />
         <script src="https://kit.fontawesome.com/2b1acf3db3.js" crossorigin="anonymous"></script>
+        <script src="scripts/purchasedItems.js"></script>
     </head>
     <body>
        <header>
