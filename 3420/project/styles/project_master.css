@@ -190,6 +190,7 @@ section#viewlists section {
 
 section#viewlists section ul {
     display: flex;
+    align-items: center;
 }
 
 section#viewlists section ul li {
@@ -204,10 +205,17 @@ section#viewlists section button{
     color: var(--dark);
     outline: inherit;
     border: none;
-
-    
+    cursor: pointer;
+    font-size: 1em;
 }
 
+section#viewlists section button:hover {
+    color: var(--light);
+}
+
+section#viewlists section button:disabled{
+    color: gray;
+}
 section#viewlists section div{
     display: flex;
     flex-direction: row;
@@ -371,6 +379,18 @@ tr:nth-of-type(2n){
 }
 thead{
     background-color: var(--darkest);
+    color: white;
+}
+
+/* Delete Account */
+
+form div#buttons a{
+    margin-top: 1.5em;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    width: fit-content;
+    font-size: 0.75em;
+    background-color: #dc3545;
     color: white;
 }
 

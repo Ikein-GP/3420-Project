@@ -12,6 +12,12 @@
     $pdo = connectDB(); //connect to the database
     $printLists = $pdo->prepare('SELECT * FROM wishlisttable WHERE ownerID = ? ORDER BY listID;'); //prepare the query to add the name and score to the database
     $printLists->execute([$_SESSION['id']]); //execute the prepared query
+
+    if(isset($_POST['disable'])){
+        $updateQuery = $pdo->prepare('UPDATE wishlisttable SET expiryDate = createDate WHERE listId = ?');
+        $updateQuery->execute([$_POST['disable']]);
+        header("Location:index.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -38,17 +44,18 @@
                 <p><?php echo($row['description']);?></p>
                 <p><span class="date">Created date: <?php echo($row['createDate']); ?></span> &middot; <span class="expiry">Expiry date: <?php echo($row['expiryDate']); ?></span></p>
                 <div>
-                    <ul>
-                        <li><a href="Project_ViewList.php?listID=<?php echo($row['listID']);?>" title="View List"><span class="fa-solid fa-list" aria-hidden="true"></span> <span class="sr-only">View List</span></a></li>
-                        <li><a href="Project_additem.php?listID=<?php echo($row['listID']);?>" title="Add item to List"><span class="fa-solid fa-plus" aria-hidden="true"></span> <span class="sr-only">Add item to List</span></a></li>
-                        <li><a href="Project_editWishlist.php?listID=<?php echo($row['listID']);?>" title="Edit List"><span class="fa-solid fa-pen-to-square" aria-hidden="true"></span> <span class="sr-only">Edit List</span></a></li>
-                        <li><a href="Project_deleteList.php?listID=<?php echo($row['listID']);?>" title="Delete List"><span class="fa-solid fa-trash" aria-hidden="true"></span> <span class="sr-only">Delete List</span></a></li>
-                        <li><button id="public-view" type="button" title="Copy Public View Link to Clipboard" value="https://loki.trentu.ca/~gregoryprouty/3420/project/Project_publicViewList?listID=<?php echo($row['listID']);?>"><span class="fa-solid fa-eye" aria-hidden="true"></span> <span class="sr-only">Copy Public View Link to Clipboard</span></button></li>
-                    </ul>
                     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                        <button type="submit" name="disable"><span class="fa-solid fa-ban" aria-hidden="true"></span> <span class="sr-only">Disable List</span></button>
+                        <ul>
+                            <li><a href="Project_ViewList.php?listID=<?php echo($row['listID']);?>" title="View List"><span class="fa-solid fa-list" aria-hidden="true"></span> <span class="sr-only">View List</span></a></li>
+                            <li><a href="Project_additem.php?listID=<?php echo($row['listID']);?>" title="Add item to List"><span class="fa-solid fa-plus" aria-hidden="true"></span> <span class="sr-only">Add item to List</span></a></li>
+                            <li><a href="Project_editWishlist.php?listID=<?php echo($row['listID']);?>" title="Edit List"><span class="fa-solid fa-pen-to-square" aria-hidden="true"></span> <span class="sr-only">Edit List</span></a></li>
+                            <li>
+                                <button <?php if($row['createDate']==$row['expiryDate']): echo "disabled "; endif?> title="disable list" type="submit" name="disable" value ="<?=$row['listID']?>"><span class="fa-solid fa-ban" aria-hidden="true"></span><span class="sr-only">Disable List</span></button>
+                            </li>
+                            <li><a href="Project_deleteList.php?listID=<?php echo($row['listID']);?>" title="Delete List"><span class="fa-solid fa-trash" aria-hidden="true"></span> <span class="sr-only">Delete List</span></a></li>
+                            <li><button type="button" title="Copy Public View Link to Clipboard" value="https://loki.trentu.ca/~gregoryprouty/3420/project/Project_publicViewList?listID=<?php echo($row['listID']);?>"><span class="fa-solid fa-eye" aria-hidden="true"></span> <span class="sr-only">Copy Public View Link to Clipboard</span></button></li>
+                        </ul>
                     </form>
-                    <a href="Project_disableItem.php?" title="Disable List"></a>
                 </div>
                 </section>
             <?php endforeach ?>
