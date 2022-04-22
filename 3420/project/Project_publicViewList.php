@@ -52,6 +52,28 @@
     
     $wishlistInfo = $wishlist->fetch();
 
+    $wishlistTheme = $pdo->prepare('SELECT Theme FROM wishlisttable WHERE listID = ?;');
+    $wishlistTheme->execute([$listID]);
+    $theme = $wishlistTheme->fetch()['Theme'];
+    switch($theme)
+    {
+        case 1:
+            $theme = "project_theme_main.css";
+            break;
+        case 2:
+            $theme = "project_theme_christmas.css";
+            break;
+        case 3:
+            $theme = "project_theme_halloween.css";
+            break;
+        case 4:
+            $theme = "project_theme_valentines.css";
+            break;
+        case 5:
+            $theme = "project_theme_wedding.css";
+            break;
+    }
+
     //get creation and expiry dates, replace the / with a - 
     $createDate = date_create(str_replace("/","-",$wishlistInfo['createDate']));
     $expiryDate = date_create(str_replace("/","-",$wishlistInfo['expiryDate']));
@@ -82,6 +104,7 @@
        <header>
             <?php include "includes/header.php";?>
             <?php include "includes/nav.php";?>
+            <link rel="stylesheet" href="styles/<?=$theme?>"/>
        </header> 
        <main>
            <h2>Viewing list : <?=$wishlistInfo['title']?></h2>

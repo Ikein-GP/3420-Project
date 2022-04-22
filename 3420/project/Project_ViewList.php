@@ -26,6 +26,28 @@
     
     $ownerID = $wishlistStub->fetch()['ownerID'];
 
+    $wishlistTheme = $pdo->prepare('SELECT Theme FROM wishlisttable WHERE listID = ?;');
+    $wishlistTheme->execute([$listID]);
+    $theme = $wishlistTheme->fetch()['Theme'];
+    switch($theme)
+    {
+        case 1:
+            $theme = "project_theme_main.css";
+            break;
+        case 2:
+            $theme = "project_theme_christmas.css";
+            break;
+        case 3:
+            $theme = "project_theme_halloween.css";
+            break;
+        case 4:
+            $theme = "project_theme_valentines.css";
+            break;
+        case 5:
+            $theme = "project_theme_wedding.css";
+            break;
+    }
+
     if($ownerID != $_SESSION['id'])
     {
         header("Location:index.php");
@@ -45,6 +67,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>All Lists&colon; Buck-et Registry &dash; Project COIS 3420H</title>
+        <link rel="stylesheet" href="styles/project_theme_christmas.css" />
         <link rel="stylesheet" href="styles/project_master.css" />
         <script src="https://kit.fontawesome.com/2b1acf3db3.js" crossorigin="anonymous"></script>
         <script defer src="scripts/viewItem.js"></script>
@@ -53,6 +76,7 @@
        <header>
             <?php include "includes/header.php";?>
             <?php include "includes/nav.php";?>
+            <link rel="stylesheet" href="styles/<?=$theme?>"/>
        </header> 
        <main>
            <h2>Viewing list : <?=$wishlist->fetch()['title']?></h2>

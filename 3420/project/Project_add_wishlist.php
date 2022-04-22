@@ -10,7 +10,8 @@ include 'includes/library.php';
     $title = $_POST['title'] ?? null;
     $description = $_POST['description'] ?? null;
     $password = $_POST['password'] ?? null;
-    $expiry = $_POST['expiry'] ?? null; //add a widget for this later
+    $expiry = $_POST['expiry'] ?? null;
+    $theme = $_POST['theme'] ?? null;
 
     if (isset($_POST['submit']))
     {   
@@ -34,8 +35,8 @@ include 'includes/library.php';
         if(count($errors)===0)
         {
             $pdo = connectDB(); //connect to database
-            $createListEntry = $pdo->prepare('INSERT INTO wishlisttable VALUES (NULL, ?, ?, ?, ?, NOW(), ?);'); //prepare the query to add the wishlist to the table of all wishlists
-            $createListEntry->execute([$title, $description, $_SESSION['id'], password_hash($password, PASSWORD_BCRYPT), $expiry]); //add the table
+            $createListEntry = $pdo->prepare('INSERT INTO wishlisttable VALUES (NULL, ?, ?, ?, ?, NOW(), ?, ?);'); //prepare the query to add the wishlist to the table of all wishlists
+            $createListEntry->execute([$title, $description, $_SESSION['id'], password_hash($password, PASSWORD_BCRYPT), $expiry, $theme]); //add the table
             $listId = $pdo->lastInsertId(); //keep track of the id number for the fresh wishlist
             header("Location:index.php");
             exit();
@@ -79,6 +80,14 @@ include 'includes/library.php';
                     <input type="text" id="expiry" name="expiry" required>
                     <span class="error <?=!isset($errors['expiry']) ? 'hidden' : "";?>">Please enter an expiry date</span>
                 </div>
+                <div>
+                    <select name="theme" id="theme">
+                        <option value="1">Default</option>
+                        <option value="2">Christmas</option>
+                        <option value="3">Halloween</option>
+                        <option value="4">Valentines</option>
+                        <option value="5">Wedding</option>
+                    </select>
                 <div>
                     <button type="submit" name="submit">Create</button>
                 </div>
