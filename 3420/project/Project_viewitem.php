@@ -21,10 +21,39 @@
 
     $itemInfo = $listItem->fetch();
 
+    
     //set values from SQL select
     $title = $itemInfo['title'];
     $descrip = $itemInfo['description'];
     $link = $itemInfo['itemLink'];
+
+    //grab the theme for the list
+    $wishlistID = $pdo->prepare('SELECT wishListID FROM wishlistitems WHERE itemID = ?;');
+    $wishlistID->execute([$itemID]);
+    $listID = $wishlistID->fetch()['wishListID'];
+
+    $wishlistTheme = $pdo->prepare('SELECT Theme FROM wishlisttable WHERE listID = ?;');
+    $wishlistTheme->execute([$listID]);
+    $theme = $wishlistTheme->fetch()['Theme'];
+    switch($theme)
+    {
+        case 1:
+            $theme = "project_theme_main.css";
+            break;
+        case 2:
+            $theme = "project_theme_christmas.css";
+            break;
+        case 3:
+            $theme = "project_theme_halloween.css";
+            break;
+        case 4:
+            $theme = "project_theme_valentines.css";
+            break;
+        case 5:
+            $theme = "project_theme_wedding.css";
+            break;
+    }
+
 
 ?>
 
@@ -40,6 +69,7 @@
 <body>
     <?php include "includes/header.php";?>
     <?php include "includes/nav.php";?>
+    <link rel="stylesheet" href="styles/<?=$theme?>"/>
     <main>
         <h2>Item View : <?=$title?> </h2>
         <h3>Item Description:</h3> <p><?=$descrip?></p>
