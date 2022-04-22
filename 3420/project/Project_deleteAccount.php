@@ -5,7 +5,6 @@ $password = $_POST['password'] ?? null;
 
 $errors = array();
 
-
 $pdo = connectDB(); //connect to the database
 
 if(!isset($_SESSION['id']))
@@ -16,7 +15,7 @@ if(!isset($_SESSION['id']))
 
 $userID = $_SESSION['id'];
 
-$accountQuery = $pdo->prepare('SELECT * FROM projectLogin WHERE userId = ?');
+$accountQuery = $pdo->prepare('SELECT * FROM projectlogin WHERE userId = ?');
 $accountQuery->execute([$userID]);
 $accountInfo = $accountQuery->fetch();
 
